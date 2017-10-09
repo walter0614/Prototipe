@@ -1,0 +1,113 @@
+<div class="panel panel-default" style="margin-top: 30px !important">
+    <div class="panel-heading">
+        <h1 class="panel-title">Productos</h1>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input type="text" ng-model="search" class="form-control" placeholder="Buscar">
+                        <hr>
+                    </div>
+                </form>
+            </div>
+            <form ng-submit="postProduct(product)">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Nombre Producto</label>
+                        <input class="form-control" id="nameP" ng-model="product.name" type="text" maxlength="100" minlength="6" required>
+                        <p class="help-block">Ingrese el nombre del producto.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Valor Producto</label>
+                        <input class="form-control" id="valueP" ng-model="product.value" type="text" maxlength="100" minlength="2" required>
+                        <p class="help-block">Ingrese el valor del producto.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Stock Producto</label>
+                        <input class="form-control" id="stockP" ng-model="product.stock" type="text" maxlength="100" minlength="1" required>
+                        <p class="help-block">Ingrese el stock del producto.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Servicio</label>
+                        <select  class="form-control" ng-model="product.type" id="typeP" ng-options="product.$id as product.name for product in categorys" required>
+                            <option value="">Elija una opción</option>
+                        </select>
+                        <p class="help-block">Seleccione el servicio del producto.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Bodega</label>
+                        <select class="form-control" ng-model="product.cellar" id="cellarP" ng-options="product.$id as product.name for product in cellars" required>
+                            <option value="">Elija una opción</option>
+                        </select>
+                        <p class="help-block">Seleccione la bodega del producto.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Proveedor</label>
+                        <select class="form-control" ng-model="product.provider" id="providerP" ng-options="product.$id as product.name for product in providers" required>
+                            <option value="">Elija una opción</option>
+                        </select>
+                        <p class="help-block">Seleccione el proveedor del producto.</p>
+                    </div>
+                </div>
+                <div class="col-md-12" align="right">
+                    <div class="form-group">
+                        <label></label>
+                        <br>
+                        <button type="button" class="btn btn-warning" type="submit" ng-click="setProduct(product)">Actualizar Producto</button>
+                        <button type="button" class="btn btn-success" type="submit" ng-click="postProduct(product)">Guardar Producto</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+    <tr>
+        <thead>
+            <th>Nombre</th>
+            <th>Valor</th>
+            <th>Stock</th>
+            <th>Proveedor</th>
+            <th>Servicio</th>
+            <th>Bodega</th>
+            <th>Opciones</th>
+        </thead>
+    </tr>
+    <tr dir-paginate="obj in products|itemsPerPage:5|filter:search">
+        <td>{{obj.name}}</td>
+        <td>{{obj.value}}</td>
+        <td>{{obj.stock}}</td>
+        <td>{{getNameService(obj.type)}}</td>
+        <td>{{getNameCellar(obj.cellar)}}</td>
+        <td>{{getNameProvider(obj.provider)}}</td>
+        <td width="10%">
+            <a ng-click="getProduct(obj.$id)" style="cursor: pointer">
+                <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+            </a>
+            <label></label>
+            <a ng-click="deleteProduct(obj)" style="cursor: pointer">
+                <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+            </a>
+        </td>
+    </tr>
+</table>
+<dir-pagination-controls 
+max-size="5"
+directions-links="true"
+boundary-links="true">
+</dir-pagination-controls>
+<pagination num-pages="noOfPages" current-page="currentPage" class="pagination-small"></pagination>
+

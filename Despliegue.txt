@@ -1,0 +1,19 @@
+0. npm init
+1. npm install express 
+2. configure server file
+4. npm install mongojs
+5. npm install body-parser
+3. node server
+
+MONGODB
+
+1. Start MongoDB
+	"C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe" --dbpath C:\projects\ProjectFinal\server\mongodb\data
+--dbpath d:\test\mongodb\data
+
+2. Connect to MongoDB
+"C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe"
+
+
+
+C:\xampp\htdocs\test\mongodb\data

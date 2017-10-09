@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Prototipo</title>
+
+    <!--Includes CSS-->
+    <link rel="stylesheet" type="text/css" href="css/angular-toastr.css" />
+
+    <!-- SB Admin CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- SB Admin -->
+
+    <!-- SB Admin JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- SB Admin JS End-->
+
+</head>
+<body ng-app="prototypeApp">  
+
+    <div ng-include="'views/includes/navbar.html'" ng-show="loggedIn"></div>
+    <div ng-include="'views/login.html'" ng-show="!loggedIn"></div>
+    
+    <!--Includes JS-->
+    <script src="js/includes/angular.min.js"></script>
+    <script src="js/includes/popper.js"></script>
+    <script src="js/includes/tether.min.js"></script>
+    <!--<script src="js/includes/jquery-3.2.1.min.js"></script>-->
+    <!--<script src="js/includes/bootstrap.js"></script>-->
+    
+    <!--Complements Angular JS-->
+    <script src="js/includes/angular-animate.min.js"></script>
+    <script src="js/includes/angular-resource.min.js"></script>
+    <script src="js/includes/angular-route.min.js"></script>
+    <script src="js/includes/ngStorage.min.js"></script>
+    <script src="js/includes/angular-toastr.tpls.js"></script>
+
+    <!-- AngularFire -->
+    <script src="js/includes/firebase.js"></script>
+    <script src="js/includes/angularfire.min.js"></script>
+
+    <!--Includes Client-->
+    <script src="js/app.js"></script>
+
+    <!--Includes Controller-->
+    <script src="js/controller/categoryCtrl.js"></script>
+    <script src="js/controller/userCtrl.js"></script>
+    <script src="js/controller/inventoryCtrl.js"></script>
+    <script src="js/controller/permissions.js"></script>
+    <script src="js/controller/reportCtrl.js"></script>
+
+    <!--Models-->
+    <script src="js/models/userModel.js"></script>
+    <script src="js/models/categoryModel.js"></script>
+    <script src="js/models/cellarModel.js"></script>
+    <script src="js/models/productModel.js"></script>
+    <script src="js/models/providerModel.js"></script>
+
+
+    <script src="js/includes/dirPagination.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+
+</body>
+</html>

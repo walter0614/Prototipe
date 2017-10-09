@@ -1,0 +1,100 @@
+<div class="panel panel-default" style="margin-top: 30px !important">
+    <div class="panel-heading">
+        <h1 class="panel-title">Bodegas</h1>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input type="text" ng-model="search" class="form-control" placeholder="Buscar">
+                        <hr>
+                    </div>
+                </form>
+            </div>
+            <form ng-submit="postCellar(cellar)">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Nombre Bodega</label>
+                        <input class="form-control" ng-model="cellar.name" type="text" maxlength="100" minlength="6" required>
+                        <p class="help-block">Ingrese el nombre de la bodega.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Telefono Bodega</label>
+                        <input class="form-control" ng-model="cellar.phone" type="text" maxlength="100" minlength="2" required>
+                        <p class="help-block">Ingrese el Telefono de la bodega.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Supervisor Bodega</label>
+                        <input class="form-control" ng-model="cellar.supervisor" type="text" maxlength="100" minlength="1" required>
+                        <p class="help-block">Ingrese el Supervisor de la bodega.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Ubicación Bodega</label>
+                        <input class="form-control" ng-model="cellar.location" type="text" maxlength="100" minlength="1" required>
+                        <p class="help-block">Ingrese la ubicación de la bodega.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Servicio</label>
+                        <select  class="form-control" ng-model="cellar.type" ng-options="product.$id as product.name for product in categorys" required>
+                            <option value="">Elija una opción</option>
+                        </select>
+                        <p class="help-block">Seleccione el servicio de la bodega.</p>
+                    </div>
+                </div>
+                <div class="col-md-12" align="right">
+                    <div class="form-group">
+                        <label></label>
+                        <br>
+                        <button type="button" class="btn btn-warning" type="submit" ng-click="setCellar(cellar)">Actualizar Bodega</button>
+                        <button type="button" class="btn btn-success" type="submit" ng-click="postCellar(cellar)">Guardar Bodega</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+    <tr>
+        <thead>
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Supervisor</th>
+            <th>Ubicación</th>
+            <th>Servicio</th>
+            <th>Opciones</th>
+        </thead>
+    </tr>
+    <tr dir-paginate="obj in cellars|itemsPerPage:5|filter:search">
+        <td>{{obj.name}}</td>
+        <td>{{obj.phone}}</td>
+        <td>{{obj.supervisor}}</td>
+        <td>{{obj.location}}</td>
+        <td>{{getNameService(obj.type)}}</td>
+        <td width="10%">
+            <a ng-click="getCellar(obj.$id)" style="cursor: pointer">
+                <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+            </a>
+            <label></label>
+            <a ng-click="deleteCellar(obj)" style="cursor: pointer">
+                <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+            </a>
+        </td>
+    </tr>
+</table>
+<dir-pagination-controls 
+max-size="5"
+directions-links="true"
+boundary-links="true">
+</dir-pagination-controls>
+<pagination num-pages="noOfPages" current-page="currentPage" class="pagination-small"></pagination>
+
