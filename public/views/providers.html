@@ -12,32 +12,32 @@
                     </div>
                 </form>
             </div>
-            <form ng-submit="postProvider(provider)">
+            <form>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Nombre Proveedor</label>
-                        <input class="form-control" ng-model="provider.name" type="text" maxlength="100" minlength="6" required>
+                        <input class="form-control" ng-model="provider.name" type="text">
                         <p class="help-block">Ingrese el nombre del proveedor.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Telefono Proveedor</label>
-                        <input class="form-control" ng-model="provider.phone" type="text" maxlength="100" minlength="2" required>
+                        <input class="form-control" ng-model="provider.phone" type="text">
                         <p class="help-block">Ingrese el Telefono del proveedor.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Dirección Proveedor</label>
-                        <input class="form-control" ng-model="provider.location" type="text" maxlength="100" minlength="1" required>
+                        <input class="form-control" ng-model="provider.location" type="text">
                         <p class="help-block">Ingrese la dirección del proveedor.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Servicio</label>
-                        <select  class="form-control" ng-model="provider.type" ng-options="product.$id as product.name for product in categorys" required>
+                        <select  class="form-control" ng-model="provider.type" ng-options="product.$id as product.name for product in categorys">
                             <option value="">Elija una opción</option>
                         </select>
                         <p class="help-block">Seleccione el servicio del proveedor.</p>

@@ -12,32 +12,32 @@
                     </div>
                 </form>
             </div>
-            <form ng-submit="postProduct(product)">
+            <form>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Nombre Producto</label>
-                        <input class="form-control" ng-model="product.name" type="text" maxlength="100" minlength="6" required>
+                        <input class="form-control" ng-model="product.name" type="text">
                         <p class="help-block">Ingrese el nombre del producto.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Valor Producto</label>
-                        <input class="form-control" ng-model="product.value" type="text" maxlength="100" minlength="2" required>
+                        <input class="form-control" ng-model="product.value" type="text">
                         <p class="help-block">Ingrese el valor del producto.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Stock Producto</label>
-                        <input class="form-control"  ng-model="product.stock" type="text" maxlength="100" minlength="1" required>
+                        <input class="form-control"  ng-model="product.stock" type="text">
                         <p class="help-block">Ingrese el stock del producto.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Servicio</label>
-                        <select  class="form-control" ng-model="product.type" ng-options="product.$id as product.name for product in categorys" required>
+                        <select  class="form-control" ng-model="product.type" ng-options="product.$id as product.name for product in categorys">
                             <option value="">Elija una opción</option>
                         </select>
                         <p class="help-block">Seleccione el servicio del producto.</p>
@@ -46,7 +46,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Bodega</label>
-                        <select class="form-control" ng-model="product.cellar" ng-options="obj.$id as obj.name for obj in cellars" required>
+                        <select class="form-control" ng-model="product.cellar" ng-options="obj.$id as obj.name for obj in cellars" >
                             <option value="">Elija una opción</option>
                         </select>
                         <p class="help-block">Seleccione la bodega del producto.</p>
@@ -55,7 +55,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Proveedor</label>
-                        <select class="form-control" ng-model="product.provider" ng-options="obj.$id as obj.name for obj in providers" required>
+                        <select class="form-control" ng-model="product.provider" ng-options="obj.$id as obj.name for obj in providers">
                             <option value="">Elija una opción</option>
                         </select>
                         <p class="help-block">Seleccione el proveedor del producto.</p>

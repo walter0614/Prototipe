@@ -6,11 +6,23 @@ app.controller("reportCtrl",function($scope, FBURL, $firebaseArray, $firebaseObj
 	var categorys = CategoryModel.getAllCategorys();
 	var cellarsData = [];
 	var categorysData = [];
-	var categorysSeries = [];
+	var categories3D = [];
 	var categories = [];
+	var cellars3D = [];
 	var data = [];
 
+	//Create all categories in each cellar
+	for (var k = cellars.length - 1; k >= 0; k--) {
+		var categorysSeries = [];
+		for (var i = categorys.length - 1; i >= 0; i--) {
+			categorysSeries[categorys[i].$id] = 0;
+		}
+		categorysData[cellars[k].$id] = categorysSeries;
+	}
+
+	//Iterate all products
 	for (var i = products.length - 1; i >= 0; i--) {
+		//Get cellar by product
 		for (var k = cellars.length - 1; k >= 0; k--) {
 			var stock = !isNaN(products[i].stock) ? products[i].stock : 0; 
 			stock = parseInt(stock);
@@ -20,34 +32,53 @@ app.controller("reportCtrl",function($scope, FBURL, $firebaseArray, $firebaseObj
 				}else{
 					cellarsData[cellars[k].name] += stock;
 				}
-				for (var m = categorys.length - 1; m >= 0; m--) {
-					var value = angular.equals(categorys[m].$id,products[i].type) ? stock : 0;
-					if (categorysData[categorys[m].name] === undefined || categorysData[categorys[m].name] === null) {
-						categorysData[categorys[m].name] = {
-							data: [value+'-'+cellars[k].name]
-						};
-					}else{
-						var detail = categorysData[categorys[m].name].data;
-						detail.push(value+'-'+cellars[k].name);
-						categorysData[categorys[m].name] = {
-							data: detail
-						};
+			}
+		}
+		//Set value from cellar and category from the product
+		for(var obj in categorysData){
+			if(angular.equals(obj,products[i].cellar)){
+				for(var objB in categorysData[obj]){
+					if(angular.equals(objB,products[i].type)){
+						categorysData[obj][objB] += stock;
 					}
 				}
 			}
 		}
 	}
-	console.log(categorysData);
+	//Prepare data for Graphic 3D
+	var categorysSeries = [];
+	for(var obj in categorysData){	
+		for(var objB in categorysData[obj]){
+			for (var i = categorys.length - 1; i >= 0; i--) {
+				if(angular.equals(objB,categorys[i].$id)){
+					var nameCategory = categorys[i].name;
+					if (categorysSeries[nameCategory] === undefined || categorysSeries[nameCategory] === null) {
+						categorysSeries[nameCategory] = {
+							name: nameCategory,
+							data: [categorysData[obj][objB]]
+						}
+					}else{
+						var valueOld = categorysSeries[nameCategory].data;
+						valueOld.push(categorysData[obj][objB]);
+						categorysSeries[nameCategory].data = valueOld;
+					}
+				}
+			}	
+		}
+		for (var k = cellars.length - 1; k >= 0; k--) {
+			if(angular.equals(cellars[k].$id,obj)){
+				cellars3D.push(cellars[k].name);		
+			}
+		}
+	}
 	var index = 0;
 	for(var obj in cellarsData){
 		categories[index] = obj;
 		data[index] = cellarsData[obj];
 		index++;
 	}
-	for(var obj in categorysData){
-		for (var i = categorysData[obj].data.length - 1; i >= 0; i--) {
-			var split = categorysData[obj].data[i].split("-");
-		}
+	for(var obj in categorysSeries){
+		categories3D.push(categorysSeries[obj]);
 	}
 	
 	Highcharts.chart('container', {
@@ -78,7 +109,7 @@ app.controller("reportCtrl",function($scope, FBURL, $firebaseArray, $firebaseObj
 		},
 
 		xAxis: {
-			categories: categories,
+			categories: cellars3D,
 			labels: {
 				skew3d: true,
 				style: {
@@ -107,24 +138,7 @@ app.controller("reportCtrl",function($scope, FBURL, $firebaseArray, $firebaseObj
 				depth: 40
 			}
 		},
-
-		series: [{
-			name: 'Auditoría',
-			data: [5, 3, 4, 7, 2],
-			stack: 'male'
-		}, {
-			name: 'Televisión',
-			data: [3, 4, 4, 2, 5],
-			stack: 'male'
-		}, {
-			name: 'Internet',
-			data: [2, 5, 6, 2, 1],
-			stack: 'female'
-		}, {
-			name: 'Telefonía',
-			data: [3, 0, 4, 4, 3],
-			stack: 'female'
-		}]
+		series: categories3D
 	});
 
 });	

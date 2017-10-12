@@ -12,39 +12,39 @@
                     </div>
                 </form>
             </div>
-            <form ng-submit="postCellar(cellar)">
+            <form>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Nombre Bodega</label>
-                        <input class="form-control" ng-model="cellar.name" type="text" maxlength="100" minlength="6" required>
+                        <input class="form-control" ng-model="cellar.name" type="text">
                         <p class="help-block">Ingrese el nombre de la bodega.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Telefono Bodega</label>
-                        <input class="form-control" ng-model="cellar.phone" type="text" maxlength="100" minlength="2" required>
+                        <input class="form-control" ng-model="cellar.phone" type="text">
                         <p class="help-block">Ingrese el Telefono de la bodega.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Supervisor Bodega</label>
-                        <input class="form-control" ng-model="cellar.supervisor" type="text" maxlength="100" minlength="1" required>
+                        <input class="form-control" ng-model="cellar.supervisor" type="text">
                         <p class="help-block">Ingrese el Supervisor de la bodega.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Ubicación Bodega</label>
-                        <input class="form-control" ng-model="cellar.location" type="text" maxlength="100" minlength="1" required>
+                        <input class="form-control" ng-model="cellar.location" type="text">
                         <p class="help-block">Ingrese la ubicación de la bodega.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Servicio</label>
-                        <select  class="form-control" ng-model="cellar.type" ng-options="product.$id as product.name for product in categorys" required>
+                        <select  class="form-control" ng-model="cellar.type" ng-options="product.$id as product.name for product in categorys">
                             <option value="">Elija una opción</option>
                         </select>
                         <p class="help-block">Seleccione el servicio de la bodega.</p>
